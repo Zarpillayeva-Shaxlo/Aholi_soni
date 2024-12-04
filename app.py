@@ -7,7 +7,7 @@ import numpy as np
 model = joblib.load("aholimodel2.pkl")
 
 # Datasetni yuklash (mamlakat va yillik ma'lumotlarni o'z ichiga olgan CSV)
-data = pd.read_csv("population_data.csv")
+data = pd.read_csv("population_data2.csv")
 
 # Foydalanuvchi interfeysi
 st.title("Aholi soni bashorati ilovasi")

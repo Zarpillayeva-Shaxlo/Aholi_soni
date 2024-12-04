@@ -4,14 +4,14 @@ import joblib
 import numpy as np
 
 # Modelni yuklash
-model = joblib.load("aholimodel1.pkl")
+model = joblib.load("aholimodel2.pkl")
 
 # Foydalanuvchi interfeysi
 st.title("Aholi soni bashorati ilovasi")
 st.write("Yillar bo'yicha aholi sonini kiriting:")
 
 # Parametrlarni foydalanuvchidan olish
-years = list(range(1960, 2020))
+years = list(range(1960, 2024))
 input_data = []
 
 for year in years:
@@ -22,4 +22,4 @@ for year in years:
 if st.button("Bashorat qiling"):
     input_array = np.array(input_data).reshape(1, -1)
     prediction = model.predict(input_array)[0]
-    st.success(f"Bashorat qilingan aholi soni (2020-yil): {int(prediction):,}")
+    st.success(f"Bashorat qilingan aholi soni (2024-yil): {int(prediction):,}")

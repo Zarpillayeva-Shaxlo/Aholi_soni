@@ -1,11 +1,10 @@
 import streamlit as st
 import pandas as pd
-import pickle
+import joblib
 import numpy as np
 
 # Modelni yuklash
-with open("aholimodel3.pkl", "rb") as file:
-    model = pickle.load(file)
+model = joblib.load("aholimodel3.pkl")
 
 # Streamlit interfeysi
 st.title("Aholi O'sishini Bashorat Qilish")

@@ -4,7 +4,7 @@ import joblib
 import numpy as np
 
 # Modelni yuklash
-model = joblib.load("aholimodel2.pkl")
+model = joblib.load("aholimodel3.pkl")
 
 # Datasetni yuklash (mamlakat va yillik ma'lumotlarni o'z ichiga olgan CSV)
 data = pd.read_csv("population_data2.csv")

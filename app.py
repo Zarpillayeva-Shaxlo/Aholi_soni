@@ -1,36 +1,28 @@
 import streamlit as st
 import pandas as pd
-import joblib
+import pickle
 import numpy as np
 
 # Modelni yuklash
-model = joblib.load("aholimodel3.pkl")
+with open("aholimodel3.pkl", "rb") as file:
+    model = pickle.load(file)
 
-# Datasetni yuklash (mamlakat va yillik ma'lumotlarni o'z ichiga olgan CSV)
-data = pd.read_csv("population_data3.csv")
+# Streamlit interfeysi
+st.title("Aholi O'sishini Bashorat Qilish")
 
-# Foydalanuvchi interfeysi
-st.title("Aholi soni bashorati ilovasi")
-st.write("Mamlakatni tanlang va 5 yillik aholi sonini bashorat qiling:")
-
-# Foydalanuvchidan mamlakatni tanlash
-countries = data["Country Name"].unique()
-selected_country = st.selectbox("Mamlakatni tanlang", countries)
-
-# Tanlangan mamlakat uchun ma'lumotlarni olish
-country_data = data[data["Country Name"] == selected_country].iloc[:, 4:]  # Faqat yillar ustunlarini olish
-
-# Ma'lumotlarni tayyorlash
-input_data = country_data.values.flatten()  # Tanlangan mamlakat yillik ma'lumotlari
-st.write(f"{selected_country} uchun yillik ma'lumotlar yuklandi.")
+# Foydalanuvchi kiritadigan parametrlar
+st.write("Yillar bo'yicha aholi sonini kiriting:")
+input_data = []
+for year in range(1960, 2024):
+    value = st.number_input(f"{year}-yil", min_value=0, value=500000)
+    input_data.append(value)
 
 # Bashorat qilish
-if st.button("Bashorat qiling"):
+if st.button("Bashorat Qilish"):
     input_array = np.array(input_data).reshape(1, -1)
+    prediction = model.predict(input_array)
     
-    # Bashorat qilinadigan yillar: 2024–2028
-    predictions = model.predict(input_array)[0]
-    
-    # 5 yillik bashorat natijalari
-    for i, year in enumerate(range(2024, 2029)):
-        st.success(f"{year}-yildagi bashorat qilingan aholi soni: {int(predictions[i]):,}")
+    # Natijalarni ko'rsatish
+    next_years = range(2025, 2030)
+    results = pd.DataFrame({'Yil': next_years, 'Bashorat qilingan aholi soni': prediction.flatten()})
+    st.write(results)

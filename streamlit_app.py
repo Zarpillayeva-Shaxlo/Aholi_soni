@@ -20,7 +20,7 @@ st.write("Mamlakat va yillar bo'yicha aholi sonini bashorat qiling!")
 
 # Mamlakat va yilni tanlash
 country = st.selectbox('Mamlakatni tanlang:', country_names)
-year = st.number_input('Bashorat qilish yili:', min_value=2025, max_value=2030, value=2026)
+year = st.number_input('Bashorat qilish yili:', min_value=2025, max_value=2040, value=2026)
 
 # Bashorat qilish tugmasi
 if st.button('Bashorat Qiling'):

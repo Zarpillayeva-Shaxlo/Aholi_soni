@@ -2,7 +2,7 @@ import streamlit as st
 import pickle
 import numpy as np
 import json
-
+# uzgarish
 # Modelni yuklash
 with open('aholimodel.pkl', 'rb') as f:
     model = pickle.load(f)
